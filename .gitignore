@@ -24,5 +24,8 @@ _deps/
 *.VC.VC.opendb
 *.vsidx
 
+# docs
+docs/
+
 # data
 *.pdf
