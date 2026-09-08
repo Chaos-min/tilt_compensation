@@ -17,6 +17,7 @@
 //std::vector<tilt_compensation::Point3f> corrected = 
 //    tilt_compensation::compensate(in_place, sensor_reading, zero_bias);
 
+
 void test_tilt_compensation_output(
     const std::vector<tilt_compensation::Point3f>& in_place,
     const tilt_compensation::TiltAngles& reading,
@@ -55,3 +56,71 @@ int main() {
     
     return 0;
 }
+
+/*
+int main() {
+    try {
+        const std::vector<tilt_compensation::Point3f> points {
+            {0.9961947F, 0.0F, 0.0871557F},
+            {1.0F, 2.0F, 3.0F},
+            {4.0F, 5.0F, 6.0F}
+        };
+        // points X=5.5° Y=0.0° zero_bias X=0.5° Y=0.0°  tx = 5.5° - 0.5° ty = 0.0° - 0.0°
+        const tilt_compensation::TiltAngles reading {5.5, 0.0};
+        const tilt_compensation::TiltAngles zero_bias {0.5, 0.0};
+
+        const std::vector<tilt_compensation::Point3f> correct = 
+            tilt_compensation::compensate(points, reading, zero_bias);
+
+        std::cout << "Corrected: " << correct.size() << std::endl;
+
+        for (std::size_t i = 0; i < correct.size(); ++i) {
+            std::cout
+                << "points [" << i << "]"
+                << "raw = (" << points[i].x << ", " << points[i].y << ", " << points[i].z << ")"
+                << "correct = (" << correct[i].x << ", " << correct[i].y << ", " << correct[i].z << ")\n";
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+    return 0;
+}*/
+
+// 度分秒(dms) 与 十进制度数(decimal)转换
+/*
+#include <cmath>
+
+struct DMS {
+    int deg;
+    int min;
+    float sec;
+};
+
+float dmsToDecimal(int deg, int min, float sec) {
+    const float sign = deg < 0 ? -1.0 : 1.0;
+    return sign * (std::fabs(static_cast<float>(deg)) + min / 60.0 + sec / 3600.0);
+}
+
+DMS decimalToDMS(float deg) {
+    const bool negative = std::signbit(deg);
+    const int totalSeconds = static_cast<int>(std::lround(std::fabs(deg) * 3600.0));
+
+    DMS out;
+    out.deg = totalSeconds / 3600;
+    out.min = (totalSeconds % 3600) / 60;
+    out.sec = static_cast<float>(totalSeconds % 60);
+
+    if (negative) out.deg = -out.deg;
+    return out;
+}
+
+int main() {
+
+    float decimal = 123.45678;
+    DMS dms = decimalToDMS(decimal);
+    std::cout << "Decimal: " << decimal << " -> DMS: " << dms.deg << "°" << dms.min << "'" << dms.sec << "\"";
+
+    decimal  = dmsToDecimal(dms.deg, dms.min, dms.sec);
+    std::cout << "DMS: " << dms.deg << "°" << dms.min << "'" << dms.sec << "\" -> Decimal: " << decimal << std::endl;
+}*/
