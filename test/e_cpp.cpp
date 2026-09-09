@@ -120,8 +120,8 @@ int main() {
 
     float decimal = 123.45678;
     DMS dms = decimalToDMS(decimal);
-    std::cout << "Decimal: " << decimal << " -> DMS: " << dms.deg << "°" << dms.min << "'" << dms.sec << "\"";
+    std::cout << "Decimal: " << decimal << " -> DMS: " << dms.deg << " deg " << dms.min << "'" << dms.sec << "\"";
 
     decimal  = dmsToDecimal(dms.deg, dms.min, dms.sec);
-    std::cout << "DMS: " << dms.deg << "°" << dms.min << "'" << dms.sec << "\" -> Decimal: " << decimal << std::endl;
+    std::cout << "DMS: " << dms.deg << " deg " << dms.min << "'" << dms.sec << "\" -> Decimal: " << decimal << std::endl;
 }*/
