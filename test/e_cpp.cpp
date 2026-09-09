@@ -39,9 +39,10 @@ void test_tilt_compensation_output(
 
 int main() {
     // Algorithm param
-    const std::vector<tilt_compensation::Point3f> points {{1.0F, 2.0F, 3.0F},
+    const std::vector<tilt_compensation::Point3f> points {{-1.0F, -2.0F, -3.0F},
                                                           {4.0F, 5.0F, 6.0F},
-                                                          {7.0F, 8.0F, 9.0F} };
+                                                          {7.0F, 8.0F, 9.0F},
+                                                          {10.0F, 11.0F, 12.0F} };
     const tilt_compensation::TiltAngles reading {-0.0697, 0.0523};
     const tilt_compensation::TiltAngles zero_bias {-0.0021, 0.0013};
     
@@ -107,8 +108,8 @@ DMS decimalToDMS(float deg) {
     const int totalSeconds = static_cast<int>(std::lround(std::fabs(deg) * 3600.0));
 
     DMS out;
-    out.deg = totalSeconds / 3600;
-    out.min = (totalSeconds % 3600) / 60;
+    out.deg = static_cast<int>(totalSeconds / 3600);
+    out.min = static_cast<int>((totalSeconds % 3600) / 60);
     out.sec = static_cast<float>(totalSeconds % 60);
 
     if (negative) out.deg = -out.deg;
