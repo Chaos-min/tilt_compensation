@@ -21,7 +21,7 @@
 void test_tilt_compensation_output(
     const std::vector<tilt_compensation::Point3f>& in_place,
     const tilt_compensation::TiltAngles& reading,
-    const tilt_compensation::TiltAngles& zero_bias) { // zero_bias 传感器的度数就是我要对齐的姿态，如果不减去这个值，把zero_bias设置为0，这不是对齐第一次点云，而是把第二次点云对齐到传感器理论零位
+    const tilt_compensation::TiltAngles& zero_bias) { // zero_bias 仪器真正水平时，倾角传感器的读数
     
     std::vector<tilt_compensation::Point3f> corrected =
         tilt_compensation::compensate(in_place, reading, zero_bias);
