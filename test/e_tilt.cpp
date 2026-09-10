@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
         tilt_compensation::compensateInPlace(
             points,
             tilt_compensation::TiltAngles{1.2210, -0.6120},
-            tilt_compensation::TiltAngles{0.0, 0.0});
+            tilt_compensation::TiltAngles{0.7500, -0.4250});
 
         std::ofstream output(argv[2]);
         if (!output) {
