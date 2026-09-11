@@ -9,8 +9,10 @@
 #include <vector>
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
-        std::cerr << "Usage: tilt_compensation_file_example <input.txt> <output.txt>\n";
+    if (argc != 7) {
+        std::cerr << "Usage: tilt_compensation_file_example "
+                     "<input.txt> <output.txt> "
+                     "<reading_x> <reading_y> <bias_x> <bias_y>\n";
         return 1;
     }
 
@@ -42,8 +44,8 @@ int main(int argc, char* argv[]) {
 
         tilt_compensation::compensateInPlace(
             points,
-            tilt_compensation::TiltAngles{1.2210, -0.6120},
-            tilt_compensation::TiltAngles{0.7500, -0.4250});
+            tilt_compensation::TiltAngles{std::stod(argv[3]), std::stod(argv[4])},
+            tilt_compensation::TiltAngles{std::stod(argv[5]), std::stod(argv[6])});
 
         std::ofstream output(argv[2]);
         if (!output) {

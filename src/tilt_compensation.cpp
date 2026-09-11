@@ -43,8 +43,8 @@ Matrix3 buildLevelingMatrix(TiltAngles reading, TiltAngles zero_bias) {
         horizontal_squared = 1.0;
     }
 
-    const double up_x = -sine_x;
-    const double up_y = sine_y;
+    const double up_x = -sine_y;
+    const double up_y = -sine_x;
     const double up_z = std::sqrt(1.0 - horizontal_squared);
     const double sine = std::sqrt(horizontal_squared);
 
